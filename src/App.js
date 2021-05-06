@@ -1,12 +1,16 @@
 import React from "react";
+import TasksList from "./components/TasksList/TasksList";
+import TaskItem from "./components/TaskItem/TaskItem";
 import "./App.css";
+import Header from "./components/Header/Header";
 
-function App() {
+const App = () => {
   return (
-    <div className="App">
-      <h1>Todo list</h1>
+    <div className="container">
+      <Header />
+      <TasksList />
     </div>
   );
-}
+};
 
 export default App;
