@@ -1,9 +1,8 @@
 import React from "react";
-import styles from "./styles.module.scss";
 
 const Header = () => {
   return (
-    <div className={styles.wrapper}>
+    <div className="absolute top-[20%] text-center">
       <h1>My Todo-List</h1>
     </div>
   );

@@ -1,23 +1,9 @@
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-body {
-  min-width: 100vw;
-  min-height: 100vh;
-  background-color: #161a1d;
-  color: #f7fff7;
-  font-family: "Montserrat", sans-serif;
-}
-
-.container {
-  width: 100%;
-  height: 100vh;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+@layer base {
+  body {
+    @apply min-w-[100vw] min-h-[100vh] bg-[#161a1d] text-[#f7fff7] font-sans;
+  }
 }
