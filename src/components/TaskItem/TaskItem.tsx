@@ -11,15 +11,12 @@ interface TaskItemProps {
 }
 
 const TaskItem = ({ todo, setTodos }: TaskItemProps) => {
-  const [completed, setCompleted] = useState<boolean>(todo.completed);
-
   const todosStorage = getStorageItem("todos") || [];
 
   const handleCheckboxChange = () => {
-    setCompleted((prevCompleted) => !prevCompleted);
     setTodos([
       ...todosStorage.filter((t: TaskItemType) => t.id !== todo.id),
-      { ...todo, completed: !completed },
+      { ...todo, completed: !todo.completed },
     ]);
   };
 
@@ -34,7 +31,7 @@ const TaskItem = ({ todo, setTodos }: TaskItemProps) => {
       </p>
       <div className="flex items-center gap-4">
         <Checkbox
-          checked={completed}
+          checked={todo.completed}
           onCheckedChange={handleCheckboxChange}
           className="ml-4"
         />
