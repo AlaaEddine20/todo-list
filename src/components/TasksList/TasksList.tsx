@@ -40,8 +40,8 @@ const TasksList = () => {
 
   return (
     <>
-      <div className="w-4/5 h-3/5 absolute top-[30%] flex flex-col">
-        <div className="w-full flex justify-around">
+      <div className="flex flex-col w-full gap-4 py-12">
+        <div className="w-full flex justify-around gap-4">
           <Input
             name="task"
             type="text"
@@ -59,10 +59,15 @@ const TasksList = () => {
         </div>
       </div>
       {todos.length > 0 ? (
-        <div className="w-4/5 h-3/5 absolute top-[50%] flex flex-col gap-4 overflow-y-auto">
+        <div className="w-full flex flex-col gap-4">
           {todos
             .map((todo) => (
-              <TaskItem key={todo.id} todo={todo} setTodos={setTodos} />
+              <TaskItem
+                key={todo.id}
+                todo={todo}
+                setTodos={setTodos}
+                todos={todos}
+              />
             ))
             .reverse()}
         </div>

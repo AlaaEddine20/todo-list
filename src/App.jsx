@@ -5,7 +5,7 @@ import Header from "./components/Header/Header";
 
 const App = () => {
   return (
-    <div className="w-full h-screen relative flex justify-center items-center flex-col">
+    <div className="w-full h-screen relative flex justify-start items-center flex-col py-10 px-4">
       <Header />
       <TasksList />
     </div>

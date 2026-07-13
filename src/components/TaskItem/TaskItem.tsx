@@ -6,26 +6,30 @@ import { Button } from "../ui/button";
 import { Eraser } from "lucide-react";
 
 interface TaskItemProps {
+  key: string;
   todo: TaskItemType;
   setTodos: React.Dispatch<React.SetStateAction<TaskItemType[]>>;
+  todos: TaskItemType[];
 }
 
-const TaskItem = ({ todo, setTodos }: TaskItemProps) => {
-  const todosStorage = getStorageItem("todos") || [];
-
+const TaskItem = ({ todo, setTodos, key, todos }: TaskItemProps) => {
   const handleCheckboxChange = () => {
-    setTodos([
-      ...todosStorage.filter((t: TaskItemType) => t.id !== todo.id),
-      { ...todo, completed: !todo.completed },
-    ]);
+    setTodos(
+      todos.map((t: TaskItemType) =>
+        t.id === todo.id ? { ...t, completed: !todo.completed } : t,
+      ),
+    );
   };
 
   const handleDeleteTodo = () => {
-    setTodos(todosStorage.filter((t: TaskItemType) => t.id !== todo.id));
+    setTodos(todos.filter((t: TaskItemType) => t.id !== todo.id));
   };
 
   return (
-    <div className="w-full flex justify-between p-4 border border-[#0a9396] rounded-[10px] text-white text-base">
+    <div
+      key={key}
+      className="w-full flex justify-between p-4 border border-[#0a9396] rounded-[10px] text-white text-base"
+    >
       <p className="bg-transparent border-none focus:ring-0">
         {todo.description}
       </p>
