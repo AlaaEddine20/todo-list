@@ -1,10 +1,24 @@
 import React, { useEffect, useState } from "react";
 import TaskItem from "../TaskItem/TaskItem";
 import { TaskItemsType } from "../../types/TaskItemType";
+import { Input } from "@/components/ui/input";
+import { getStorageItem, setStorageItem } from "@/lib/utils";
 
 const TasksList = () => {
   const [todos, setTodos] = useState<TaskItemsType>([]);
   const [inputText, setInputText] = useState<string>("");
+
+  const storedTodos = getStorageItem("todos");
+
+  useEffect(() => {
+    if (storedTodos) {
+      setTodos(storedTodos);
+    }
+  }, []);
+
+  useEffect(() => {
+    setStorageItem("todos", todos);
+  }, [todos]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputText(e.target.value);
@@ -24,23 +38,11 @@ const TasksList = () => {
     setInputText("");
   };
 
-  useEffect(() => {
-    const storedTodos = localStorage.getItem("todos");
-
-    if (storedTodos) {
-      setTodos(JSON.parse(storedTodos));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(todos));
-  }, [todos]);
-
   return (
     <>
       <div className="w-4/5 h-3/5 absolute top-[30%] flex flex-col">
         <div className="w-full flex justify-around">
-          <input
+          <Input
             name="task"
             type="text"
             placeholder="Add task here.."
@@ -59,7 +61,9 @@ const TasksList = () => {
       {todos.length > 0 ? (
         <div className="w-4/5 h-3/5 absolute top-[50%] flex flex-col gap-4 overflow-y-auto">
           {todos
-            .map((todo) => <TaskItem key={todo.id} todo={todo} />)
+            .map((todo) => (
+              <TaskItem key={todo.id} todo={todo} setTodos={setTodos} />
+            ))
             .reverse()}
         </div>
       ) : null}
